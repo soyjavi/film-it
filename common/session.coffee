@@ -5,11 +5,11 @@ User = require "./models/user"
 
 module.exports = (request, response) ->
   promise = new Hope.Promise()
-  auth = request.session
-  if not auth
+  session = request.session
+  if not session
     response.unauthorized()
   else
-    User.findOne _id: auth, (error, result) ->
+    User.findOne _id: session, (error, result) ->
       if result
         promise.done error, result
       else
